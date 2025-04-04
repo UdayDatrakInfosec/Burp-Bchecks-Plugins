@@ -1,0 +1,33 @@
+metadata:
+    language: v1-beta
+    name: "Template Injection"
+    description: "Template Injectio"
+    author: "Uday Datrak"
+    tags: "SSTI"
+
+run for each:
+    payloads =
+"5444*55558",
+"{5444*55558}",
+"{{5444*55558}}",
+"{{{5444*55558}}}",
+"#{5444*55558}",
+"${5444*55558}",
+"<%=5444*55558 %>",
+"{{=5444*55558}}",
+"{^xyzm42}1764{/xyzm42}",
+"${donotexists|5444*55558}",
+"[[${5444*55558}]]"
+
+given any insertion point then
+    send payload:
+        appending: {payloads}
+    send payload:
+        replacing: {payloads}
+
+    if "302457752" in {latest.response} then
+        report issue:
+            severity: high
+            confidence: tentative
+            detail: "Template Injection"
+    end if
