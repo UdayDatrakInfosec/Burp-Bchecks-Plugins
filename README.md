@@ -6,7 +6,7 @@ Automated Workflows: Automate common tasks within Burp Suite to speed up your pe
 
 Flexible Integration: Easily integrate with external tools and APIs for enhanced reporting and analysis.
 
-Open-Source: Modify and extend the plugins to suit your requirements.
+Open-Source: I have developed around 100 automation plugins and you can modify these five scripts and extend the plugins code to suit your requirements.
 
 Contributing Feel free to fork this repository, improve the plugins, or create pull requests with new features. Contributions are always welcome.
 
