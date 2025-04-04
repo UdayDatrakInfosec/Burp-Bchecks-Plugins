@@ -1,4 +1,5 @@
-Overview This repository contains a collection of custom Burp Suite plugins developeded to extend the functionality of Burp Suite's security testing tools. These plugins are designed to automate certain tasks, enhance reporting, or integrate with other tools, improving the efficiency of security assessments.
+Burpsuite Custom Bchecks Custom PLugins Overview:
+This repository contains a collection of custom Burp Suite plugins developeded to extend the functionality of Burp Suite's security testing tools. These plugins are designed to automate certain tasks, enhance reporting, or integrate with other tools, improving the efficiency of security assessments.
 
 Features Customizable Functions: Tailor the plugins to fit your specific security testing needs.
 
